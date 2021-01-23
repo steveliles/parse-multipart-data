@@ -67,7 +67,7 @@ const body = "..the multipart raw body..";
 const boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
 const parts = multipart.Parse(body,boundary);
 
-for (let i=0; i< parts.length; i++) {
+for (let i = 0; i < parts.length; i++) {
   const part = parts[i];
   // will be: { filename: 'A.txt', type: 'text/plain', data: <Buffer 41 41 41 41 42 42 42 42> }
 }
