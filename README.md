@@ -61,19 +61,16 @@ hello how are you
 
 Now, having this two key values then you can implement it:
 
-```javascript
-var multipart = require('parse-multipart');
-var body = "..the multipart raw body..";
-var boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
-var parts = multipart.Parse(body,boundary);
+```typescript
+const multipart = require('parse-multipart');
+const body = "..the multipart raw body..";
+const boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
+const parts = multipart.Parse(body,boundary);
 
-for(var i=0;i<parts.length;i++){
-	var part = parts[i];
-	// will be:
-	// { filename: 'A.txt', type: 'text/plain',
-	//		data: <Buffer 41 41 41 41 42 42 42 42> }
+for (let i=0; i< parts.length; i++) {
+  const part = parts[i];
+  // will be: { filename: 'A.txt', type: 'text/plain', data: <Buffer 41 41 41 41 42 42 42 42> }
 }
 ```
 
-The returned data is an array of parts, each one described by a filename,
-a type and a data, this last one is a Buffer (see also Node Buffer).
+The returned data is a `part` array with properties: `filename`, `type` and `data`. `data` is type of [Buffer](https://nodejs.org/api/buffer.html).
