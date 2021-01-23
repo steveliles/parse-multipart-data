@@ -13,7 +13,7 @@ uploaded files or data).
 
 The raw payload formatted as multipart/form-data will looks like this one:
 
-```
+```bash
 ------WebKitFormBoundaryDtbT5UpPj83kllfw
 Content-Disposition: form-data; name="uploads[]"; filename="somebinary.dat"
 Content-Type: application/octet-stream
@@ -43,7 +43,7 @@ needs to be present:
 
 * body, which can be:
 
-```
+```bash
 ------WebKitFormBoundaryDtbT5UpPj83kllfw
 Content-Disposition: form-data; name="uploads[]"; filename="sometext.txt"
 Content-Type: application/octet-stream
@@ -55,24 +55,24 @@ hello how are you
 * boundary, the string which serve as a 'separator' between parts, it normally
   comes to you via headers. In this case, the boundary is:
 
-```
-	----WebKitFormBoundaryDtbT5UpPj83kllfw
+```bash
+----WebKitFormBoundaryDtbT5UpPj83kllfw
 ```
 
 Now, having this two key values then you can implement it:
 
-```
-	var multipart = require('parse-multipart');
-	var body = "..the multipart raw body..";
-	var boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
-	var parts = multipart.Parse(body,boundary);
+```javascript
+var multipart = require('parse-multipart');
+var body = "..the multipart raw body..";
+var boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
+var parts = multipart.Parse(body,boundary);
 
-	for(var i=0;i<parts.length;i++){
-		var part = parts[i];
-		// will be:
-		// { filename: 'A.txt', type: 'text/plain',
-		//		data: <Buffer 41 41 41 41 42 42 42 42> }
-	}
+for(var i=0;i<parts.length;i++){
+	var part = parts[i];
+	// will be:
+	// { filename: 'A.txt', type: 'text/plain',
+	//		data: <Buffer 41 41 41 41 42 42 42 42> }
+}
 ```
 
 The returned data is an array of parts, each one described by a filename,
