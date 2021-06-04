@@ -1,6 +1,6 @@
 # parse-multipart-data
 
-A javascript/nodejs multipart/form-data parser which operates on raw data.
+A Typescript client/service  multipart/form-data parser which operates on raw data.
 Forked from [freesoftwarefactory/parse-multipart](https://github.com/freesoftwarefactory/parse-multipart)
 
 # Background
