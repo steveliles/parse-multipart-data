@@ -3,7 +3,7 @@
  * usage:
  * const multipart = require('./multipart.js');
  * const body = multipart.DemoData(); 							   // raw body
- * const body = new Buffer(event['body-json'].toString(),'base64'); // AWS case
+ * const body = Buffer.from(event['body-json'].toString(),'base64'); // AWS case
  * const boundary = multipart.getBoundary(event.params.header['content-type']);
  * const parts = multipart.Parse(body,boundary);
  * each part is:
@@ -176,7 +176,7 @@ function process(part: Part): Input {
   }
 
   Object.defineProperty(input, 'data', {
-    value: new Buffer(part.part),
+    value: Buffer.from(part.part),
     writable: true,
     enumerable: true,
     configurable: true
