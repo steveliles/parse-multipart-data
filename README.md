@@ -1,3 +1,5 @@
+steve's version
+
 # parse-multipart-data
 
 A Typescript lib multipart/form-data parser which operates on raw data.
@@ -41,7 +43,7 @@ than one file in the same payload, that's why it is called: multipart.
 In the next lines you can see a implementation. In this case two key values
 needs to be present:
 
-* body, which can be:
+- body, which can be:
 
 ```bash
 ------WebKitFormBoundaryDtbT5UpPj83kllfw
@@ -52,7 +54,7 @@ hello how are you
 ------WebKitFormBoundaryDtbT5UpPj83kllfw--
 ```
 
-* boundary, the string which serve as a 'separator' between parts, it normally
+- boundary, the string which serve as a 'separator' between parts, it normally
   comes to you via headers. In this case, the boundary is:
 
 ```bash
@@ -62,13 +64,13 @@ hello how are you
 Now, having this two key values then you can implement it:
 
 ```typescript
-const multipart = require('parse-multipart');
-const body = "..the multipart raw body..";
-const boundary = "----WebKitFormBoundaryDtbT5UpPj83kllfw";
-const parts = multipart.Parse(body,boundary);
+const multipart = require('parse-multipart')
+const body = '..the multipart raw body..'
+const boundary = '----WebKitFormBoundaryDtbT5UpPj83kllfw'
+const parts = multipart.Parse(body, boundary)
 
 for (let i = 0; i < parts.length; i++) {
-  const part = parts[i];
+  const part = parts[i]
   // will be: { filename: 'A.txt', type: 'text/plain', data: <Buffer 41 41 41 41 42 42 42 42> }
 }
 ```
