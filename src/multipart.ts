@@ -106,16 +106,14 @@ export function getBoundary(header: string): string {
 export function DemoData(): { body: Buffer; boundary: string } {
   let body = 'trash1\r\n'
   body += '------WebKitFormBoundaryvef1fLxmoUdYZWXp\r\n'
-  body +=
-    'Content-Disposition: form-data; name="uploads[]"; filename="A.txt"\r\n'
+  body += 'Content-Disposition: form-data; name="file-A"; filename="A.txt"\r\n'
   body += 'Content-Type: text/plain\r\n'
   body += '\r\n'
   body += '@11X'
   body += '111Y\r\n'
   body += '111Z\rCCCC\nCCCC\r\nCCCCC@\r\n\r\n'
   body += '------WebKitFormBoundaryvef1fLxmoUdYZWXp\r\n'
-  body +=
-    'Content-Disposition: form-data; name="uploads[]"; filename="B.txt"\r\n'
+  body += 'Content-Disposition: form-data; name="file-B"; filename="B.txt"\r\n'
   body += 'Content-Type: text/plain\r\n'
   body += '\r\n'
   body += '@22X'
@@ -154,7 +152,6 @@ function process(part: Part): Input {
     return o
   }
   const header = part.header.split(';')
-
   const filenameData = header[2]
   let input = {}
   if (filenameData) {
@@ -166,14 +163,13 @@ function process(part: Part): Input {
       enumerable: true,
       configurable: true
     })
-  } else {
-    Object.defineProperty(input, 'name', {
-      value: header[1].split('=')[1].replace(/"/g, ''),
-      writable: true,
-      enumerable: true,
-      configurable: true
-    })
   }
+  Object.defineProperty(input, 'name', {
+    value: header[1].split('=')[1].replace(/"/g, ''),
+    writable: true,
+    enumerable: true,
+    configurable: true
+  })
 
   Object.defineProperty(input, 'data', {
     value: Buffer.from(part.part),
